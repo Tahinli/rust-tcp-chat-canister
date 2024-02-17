@@ -1,0 +1,9 @@
+type Message = record
+    {
+        message: text;
+    }
+
+service : {
+    "message_query": (Message) -> (Message) query;
+    "message_update": (Message) -> ();
+}

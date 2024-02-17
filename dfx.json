@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "chat_backend": {
+      "candid": "src/chat_backend/chat_backend.did",
+      "package": "chat_backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
