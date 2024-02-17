@@ -1,6 +1,6 @@
 use std::ops::DerefMut;
 
-use connections::{Message, MESSAGES};
+use connections::MESSAGES;
 
 pub mod connections;
 

@@ -5,18 +5,20 @@ use std::str::from_utf8;
 use candid::{CandidType, Deserialize};
 
 
-
+//For storing data we need thread local
 thread_local! 
     {
         pub static MESSAGES: Vec<Message> = vec![];
     }
 
+//This struct keeps our messages
 #[derive(CandidType, Deserialize, Clone)]
 pub struct Message
     {
         message: String,
     }
 
+//This enum is used for match for strictions
 pub enum EnvArg
     {
         Client,
@@ -25,6 +27,7 @@ pub enum EnvArg
     }
 impl EnvArg 
     {
+        //This function handles network code for client and stores data in vector
         pub fn c_connect() -> bool
             {
                 let mut messages:Vec<Message> = vec![];
@@ -69,6 +72,7 @@ impl EnvArg
                 return true;
             }
 
+        //This function handles network code for server and stores data in vector
         pub fn s_connect() -> bool
             {
                 let mut messages:Vec<Message> = vec![];
@@ -118,6 +122,7 @@ impl EnvArg
             }
     }
 
+//This function collects environmental variables
 pub fn take_arg() -> EnvArg
     {
         let args:Vec<String> = env::args().collect();
@@ -144,6 +149,7 @@ pub fn take_arg() -> EnvArg
         return EnvArg::Fail;
     }
 
+//This function takes string from user
 fn take_string() -> String
     {
         let mut input = String::new();
@@ -151,6 +157,7 @@ fn take_string() -> String
         input
     }
 
+//This is a enter function for client
 fn client() 
     {
         println!("Client");
@@ -159,6 +166,7 @@ fn client()
                 println!("Client Exit");
             }
     }
+//This is a enter funciton for server
 fn server()
     {
         println!("Server");
@@ -167,9 +175,11 @@ fn server()
                 println!("Server Exit");
             }
     }
+//This is a enter function for whole code
 pub fn start()
     {
         println!("Hello, world!");
+        //We take args
         match take_arg() 
             {
                 EnvArg::Client => client(),
